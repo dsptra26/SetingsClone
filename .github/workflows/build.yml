@@ -13,10 +13,12 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Setup Swift & Build Project Structure
+      - name: Setup iOS Project Directory
         run: |
-          mkdir -p SettingsClone
-          cat << 'EOF' > SettingsClone/Info.plist
+          mkdir -p Payload/SettingsClone.app
+          
+          # Buat Info.plist
+          cat << 'EOF' > Payload/SettingsClone.app/Info.plist
           <?xml version="1.0" encoding="UTF-8"?>
           <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
           <plist version="1.0">
@@ -39,18 +41,17 @@ jobs:
           </plist>
           EOF
 
-      - name: Compile SwiftUI Code to iOS App
+      - name: Compile SwiftUI Code
         run: |
-          xcrun -sdk iphoneos swiftc -parse-as-library \
-            App.swift ContentView.swift \
+          SDK_PATH=$(xcrun --sdk iphoneos --show-sdk-path)
+          
+          swiftc -sdk $SDK_PATH \
             -target arm64-apple-ios15.0 \
-            -o SettingsCloneExecutable
+            -emit-executable \
+            -o Payload/SettingsClone.app/SettingsClone \
+            App.swift ContentView.swift
 
-          mkdir -p Payload/SettingsClone.app
-          mv SettingsCloneExecutable Payload/SettingsClone.app/SettingsClone
-          mv SettingsClone/Info.plist Payload/SettingsClone.app/Info.plist
-
-      - name: Package to IPA File
+      - name: Create IPA Package
         run: |
           zip -r SettingsClone.ipa Payload
 
