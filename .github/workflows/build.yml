@@ -13,64 +13,27 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Buat Proyek Xcode Sederhana
+      - name: Select Xcode Version
+        run: sudo xcode-select -s /Applications/Xcode_15.4.app/Contents/Developer
+
+      - name: Build App with Xcodebuild
         run: |
-          mkdir -p SettingsClone.xcodeproj
-          cat << 'EOF' > SettingsClone.xcodeproj/project.pbxproj
-          // !$*UTF8*$!
-          {
-              archiveVersion = 1;
-              classes = {};
-              objectVersion = 46;
-              objects = {};
-              rootObject = 000000000000000000000000 /* Project object */;
-          }
-          EOF
+          xcodebuild -project SettingsClone.xcodeproj \
+                     -scheme SettingsClone \
+                     -configuration Release \
+                     -sdk iphoneos \
+                     -derivedDataPath build \
+                     CODE_SIGNING_ALLOWED=NO \
+                     CODE_SIGNING_REQUIRED=NO \
+                     CODE_SIGN_IDENTITY=""
 
-          mkdir -p SettingsClone
-          cat << 'EOF' > SettingsClone/Info.plist
-          <?xml version="1.0" encoding="UTF-8"?>
-          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-          <plist version="1.0">
-          <dict>
-              <key>CFBundleExecutable</key>
-              <string>SettingsClone</string>
-              <key>CFBundleIdentifier</key>
-              <string>com.dimas.settingsclone</string>
-              <key>CFBundleName</key>
-              <string>Pengaturan</string>
-              <key>CFBundleShortVersionString</key>
-              <string>1.0</string>
-              <key>CFBundleVersion</key>
-              <string>1</string>
-              <key>LSRequiresIPhoneOS</key>
-              <true/>
-              <key>UILaunchStoryboardName</key>
-              <string>LaunchScreen</string>
-          </dict>
-          </plist>
-          EOF
-
-      - name: Kompilasi Menggunakan Swift Compiler
+      - name: Package App into IPA
         run: |
-          SDK_PATH=$(xcrun --sdk iphoneos --show-sdk-path)
-          mkdir -p Payload/SettingsClone.app
-          
-          swiftc -sdk "$SDK_PATH" \
-            -target arm64-apple-ios15.0 \
-            -parse-as-library \
-            -emit-executable \
-            -o Payload/SettingsClone.app/SettingsClone \
-            App.swift ContentView.swift \
-            -framework SwiftUI -framework UIKit -framework Foundation
-
-          cp SettingsClone/Info.plist Payload/SettingsClone.app/Info.plist
-
-      - name: Buat File IPA
-        run: |
+          mkdir -p Payload
+          cp -r build/Build/Products/Release-iphoneos/SettingsClone.app Payload/
           zip -r SettingsClone.ipa Payload
 
-      - name: Unggah Artefak IPA
+      - name: Upload IPA Artifact
         uses: actions/upload-artifact@v4
         with:
           name: SettingsClone-IPA
