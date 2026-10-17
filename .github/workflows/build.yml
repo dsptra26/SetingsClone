@@ -13,12 +13,22 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Setup Project Structure & Compile
+      - name: Buat Proyek Xcode Sederhana
         run: |
-          mkdir -p Payload/SettingsClone.app
-          
-          # Buat Info.plist
-          cat << 'EOF' > Payload/SettingsClone.app/Info.plist
+          mkdir -p SettingsClone.xcodeproj
+          cat << 'EOF' > SettingsClone.xcodeproj/project.pbxproj
+          // !$*UTF8*$!
+          {
+              archiveVersion = 1;
+              classes = {};
+              objectVersion = 46;
+              objects = {};
+              rootObject = 000000000000000000000000 /* Project object */;
+          }
+          EOF
+
+          mkdir -p SettingsClone
+          cat << 'EOF' > SettingsClone/Info.plist
           <?xml version="1.0" encoding="UTF-8"?>
           <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
           <plist version="1.0">
@@ -41,20 +51,26 @@ jobs:
           </plist>
           EOF
 
-          # Kompilasi file Swift menggunakan SDK iOS
+      - name: Kompilasi Menggunakan Swift Compiler
+        run: |
           SDK_PATH=$(xcrun --sdk iphoneos --show-sdk-path)
+          mkdir -p Payload/SettingsClone.app
+          
           swiftc -sdk "$SDK_PATH" \
             -target arm64-apple-ios15.0 \
             -parse-as-library \
             -emit-executable \
             -o Payload/SettingsClone.app/SettingsClone \
-            App.swift ContentView.swift -framework SwiftUI -framework Foundation
+            App.swift ContentView.swift \
+            -framework SwiftUI -framework UIKit -framework Foundation
 
-      - name: Create IPA Package
+          cp SettingsClone/Info.plist Payload/SettingsClone.app/Info.plist
+
+      - name: Buat File IPA
         run: |
           zip -r SettingsClone.ipa Payload
 
-      - name: Upload IPA Artifact
+      - name: Unggah Artefak IPA
         uses: actions/upload-artifact@v4
         with:
           name: SettingsClone-IPA
