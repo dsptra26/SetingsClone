@@ -13,7 +13,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Setup iOS Project Directory
+      - name: Setup Project Structure & Compile
         run: |
           mkdir -p Payload/SettingsClone.app
           
@@ -41,15 +41,14 @@ jobs:
           </plist>
           EOF
 
-      - name: Compile SwiftUI Code
-        run: |
+          # Kompilasi file Swift menggunakan SDK iOS
           SDK_PATH=$(xcrun --sdk iphoneos --show-sdk-path)
-          
-          swiftc -sdk $SDK_PATH \
+          swiftc -sdk "$SDK_PATH" \
             -target arm64-apple-ios15.0 \
+            -parse-as-library \
             -emit-executable \
             -o Payload/SettingsClone.app/SettingsClone \
-            App.swift ContentView.swift
+            App.swift ContentView.swift -framework SwiftUI -framework Foundation
 
       - name: Create IPA Package
         run: |
