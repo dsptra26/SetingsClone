@@ -1,0 +1,61 @@
+name: Build Settings Clone IPA
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-14
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Swift & Build Project Structure
+        run: |
+          mkdir -p SettingsClone
+          cat << 'EOF' > SettingsClone/Info.plist
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0">
+          <dict>
+              <key>CFBundleExecutable</key>
+              <string>SettingsClone</string>
+              <key>CFBundleIdentifier</key>
+              <string>com.dimas.settingsclone</string>
+              <key>CFBundleName</key>
+              <string>Pengaturan</string>
+              <key>CFBundleShortVersionString</key>
+              <string>1.0</string>
+              <key>CFBundleVersion</key>
+              <string>1</string>
+              <key>LSRequiresIPhoneOS</key>
+              <true/>
+              <key>UILaunchStoryboardName</key>
+              <string>LaunchScreen</string>
+          </dict>
+          </plist>
+          EOF
+
+      - name: Compile SwiftUI Code to iOS App
+        run: |
+          xcrun -sdk iphoneos swiftc -parse-as-library \
+            App.swift ContentView.swift \
+            -target arm64-apple-ios15.0 \
+            -o SettingsCloneExecutable
+
+          mkdir -p Payload/SettingsClone.app
+          mv SettingsCloneExecutable Payload/SettingsClone.app/SettingsClone
+          mv SettingsClone/Info.plist Payload/SettingsClone.app/Info.plist
+
+      - name: Package to IPA File
+        run: |
+          zip -r SettingsClone.ipa Payload
+
+      - name: Upload IPA Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: SettingsClone-IPA
+          path: SettingsClone.ipa
