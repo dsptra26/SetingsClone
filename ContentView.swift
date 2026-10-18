@@ -5,191 +5,202 @@ struct SettingsMainView: View {
     @State private var searchText = ""
     
     var body: some View {
-        NavigationStack {
-            ZStack(alignment: .bottom) {
-                Color.black
-                    .ignoresSafeArea()
-                
-                List {
-                    Section {
-                        HStack(spacing: 15) {
-                            Circle()
-                                .fill(LinearGradient(
-                                    colors: [Color(red: 0.25, green: 0.55, blue: 0.65), Color(red: 0.1, green: 0.25, blue: 0.35)],
-                                    startPoint: .topLeading,
-                                    endPoint: .bottomTrailing
-                                ))
-                                .frame(width: 60, height: 60)
-                            
-                            VStack(alignment: .leading, spacing: 3) {
-                                Text("Dimas Saputra")
-                                    .font(.system(size: 20, weight: .semibold))
-                                    .foregroundColor(.primary)
-                                Text("Akun Apple, iCloud, dan lainnya")
-                                    .font(.system(size: 13))
-                                    .foregroundColor(.gray)
-                            }
-                        }
-                        .padding(.vertical, 4)
-                    }
-                    
-                    Section {
-                        HStack {
-                            Text("Perbarui ke iOS 27.0.1")
-                                .font(.system(size: 16))
-                            Spacer()
-                            ZStack {
+        ZStack {
+            // Memaksa latar belakang hitam menutupi seluruh layar fisik tanpa batas
+            Color.black
+                .ignoresSafeArea()
+            
+            NavigationStack {
+                ZStack(alignment: .bottom) {
+                    List {
+                        // Section 1: Profil Akun Apple
+                        Section {
+                            HStack(spacing: 15) {
                                 Circle()
-                                    .fill(Color.red)
-                                    .frame(width: 22, height: 22)
-                                Text("1")
-                                    .font(.system(size: 13, weight: .bold))
-                                    .foregroundColor(.white)
+                                    .fill(LinearGradient(
+                                        colors: [Color(red: 0.25, green: 0.55, blue: 0.65), Color(red: 0.1, green: 0.25, blue: 0.35)],
+                                        startPoint: .topLeading,
+                                        endPoint: .bottomTrailing
+                                    ))
+                                    .frame(width: 60, height: 60)
+                                
+                                VStack(alignment: .leading, spacing: 3) {
+                                    Text("Dimas Saputra")
+                                        .font(.system(size: 20, weight: .semibold))
+                                        .foregroundColor(.primary)
+                                    Text("Akun Apple, iCloud, dan lainnya")
+                                        .font(.system(size: 13))
+                                        .foregroundColor(.gray)
+                                }
                             }
+                            .padding(.vertical, 4)
                         }
-                    }
-                    
-                    Section {
-                        HStack {
-                            SettingsIcon(systemName: "airplane", backgroundColor: .orange)
-                            Text("Mode Pesawat").font(.system(size: 16))
-                            Spacer()
-                            Toggle("", isOn: $isAirplaneModeOn)
-                                .labelsHidden()
-                        }
-                        HStack {
-                            SettingsIcon(systemName: "wifi", backgroundColor: .blue)
-                            Text("Wi-Fi").font(.system(size: 16))
-                            Spacer()
-                            Text("AWIS D ROKET").font(.system(size: 15)).foregroundColor(.gray)
-                        }
-                        HStack {
-                            SettingsIcon(systemName: "bluetooth", backgroundColor: .blue)
-                            Text("Bluetooth").font(.system(size: 16))
-                            Spacer()
-                            Text("Tidak Terhubung").font(.system(size: 15)).foregroundColor(.gray)
-                        }
-                        HStack {
-                            SettingsIcon(systemName: "antenna.radiowaves.left.and.right", backgroundColor: .green)
-                            Text("Seluler").font(.system(size: 16))
-                            Spacer()
-                            Text("Mati").font(.system(size: 15)).foregroundColor(.gray)
-                        }
-                        HStack {
-                            SettingsIcon(systemName: "personalhotspot", backgroundColor: Color(red: 0.15, green: 0.75, blue: 0.4))
-                            Text("Hotspot Pribadi").font(.system(size: 16))
-                            Spacer()
-                            Text("Mati").font(.system(size: 15)).foregroundColor(.gray)
-                        }
-                        HStack {
-                            SettingsIcon(systemName: "battery.100", backgroundColor: .green)
-                            Text("Baterai").font(.system(size: 16))
-                        }
-                    }
-                    
-                    Section {
-                        NavigationLink(destination: GeneralSettingsView()) {
+                        
+                        // Section 2: Banner Perbarui iOS
+                        Section {
                             HStack {
-                                SettingsIcon(systemName: "gear", backgroundColor: .gray)
-                                Text("Umum").font(.system(size: 16))
+                                Text("Perbarui ke iOS 27.0.1")
+                                    .font(.system(size: 16))
+                                Spacer()
+                                ZStack {
+                                    Circle()
+                                        .fill(Color.red)
+                                        .frame(width: 22, height: 22)
+                                    Text("1")
+                                        .font(.system(size: 13, weight: .bold))
+                                        .foregroundColor(.white)
+                                }
                             }
                         }
-                        HStack {
-                            SettingsIcon(systemName: "accessibility", backgroundColor: .blue)
-                            Text("Aksesibilitas").font(.system(size: 16))
+                        
+                        // Section 3: Konektivitas & Baterai (Bluetooth Lengkap)
+                        Section {
+                            HStack {
+                                SettingsIcon(systemName: "airplane", backgroundColor: .orange)
+                                Text("Mode Pesawat").font(.system(size: 16))
+                                Spacer()
+                                Toggle("", isOn: $isAirplaneModeOn)
+                                    .labelsHidden()
+                            }
+                            HStack {
+                                SettingsIcon(systemName: "wifi", backgroundColor: .blue)
+                                Text("Wi-Fi").font(.system(size: 16))
+                                Spacer()
+                                Text("AWIS D ROKET").font(.system(size: 15)).foregroundColor(.gray)
+                            }
+                            HStack {
+                                SettingsIcon(systemName: "bluetooth", backgroundColor: .blue)
+                                Text("Bluetooth").font(.system(size: 16))
+                                Spacer()
+                                Text("Tidak Terhubung").font(.system(size: 15)).foregroundColor(.gray)
+                            }
+                            HStack {
+                                SettingsIcon(systemName: "antenna.radiowaves.left.and.right", backgroundColor: .green)
+                                Text("Seluler").font(.system(size: 16))
+                                Spacer()
+                                Text("Mati").font(.system(size: 15)).foregroundColor(.gray)
+                            }
+                            HStack {
+                                SettingsIcon(systemName: "personalhotspot", backgroundColor: Color(red: 0.15, green: 0.75, blue: 0.4))
+                                Text("Hotspot Pribadi").font(.system(size: 16))
+                                Spacer()
+                                Text("Mati").font(.system(size: 15)).foregroundColor(.gray)
+                            }
+                            HStack {
+                                SettingsIcon(systemName: "battery.100", backgroundColor: .green)
+                                Text("Baterai").font(.system(size: 16))
+                            }
                         }
-                        HStack {
-                            SettingsIcon(systemName: "sparkles", backgroundColor: Color(red: 0.85, green: 0.35, blue: 0.2))
-                            Text("Apple Intelligence & Siri").font(.system(size: 16))
+                        
+                        // Section 4: Menu Utama Sistem
+                        Section {
+                            NavigationLink(destination: GeneralSettingsView()) {
+                                HStack {
+                                    SettingsIcon(systemName: "gear", backgroundColor: .gray)
+                                    Text("Umum").font(.system(size: 16))
+                                }
+                            }
+                            HStack {
+                                SettingsIcon(systemName: "accessibility", backgroundColor: .blue)
+                                Text("Aksesibilitas").font(.system(size: 16))
+                            }
+                            HStack {
+                                SettingsIcon(systemName: "sparkles", backgroundColor: Color(red: 0.85, green: 0.35, blue: 0.2))
+                                Text("Apple Intelligence & Siri").font(.system(size: 16))
+                            }
+                            HStack {
+                                SettingsIcon(systemName: "magnifyingglass", backgroundColor: .gray)
+                                Text("Cari").font(.system(size: 16))
+                            }
+                            HStack {
+                                SettingsIcon(systemName: "camera.fill", backgroundColor: .gray)
+                                Text("Kamera").font(.system(size: 16))
+                            }
+                            HStack {
+                                SettingsIcon(systemName: "apps.iphone", backgroundColor: .blue)
+                                Text("Layar Utama & Perpustakaan App").font(.system(size: 16))
+                            }
+                            HStack {
+                                SettingsIcon(systemName: "switch.2", backgroundColor: .gray)
+                                Text("Pusat Kontrol").font(.system(size: 16))
+                            }
+                            HStack {
+                                SettingsIcon(systemName: "clock.badge.checkmark.fill", backgroundColor: .black)
+                                Text("Siaga").font(.system(size: 16))
+                            }
+                            HStack {
+                                SettingsIcon(systemName: "sun.max.fill", backgroundColor: .blue)
+                                Text("Tampilan & Kecerahan").font(.system(size: 16))
+                            }
+                            HStack {
+                                SettingsIcon(systemName: "arrow.right.circle.fill", backgroundColor: .blue)
+                                Text("Tombol Tindakan").font(.system(size: 16))
+                            }
+                            HStack {
+                                SettingsIcon(systemName: "circles.hexagongrid.fill", backgroundColor: Color(red: 0.3, green: 0.7, blue: 0.9))
+                                Text("Wallpaper").font(.system(size: 16))
+                            }
                         }
-                        HStack {
-                            SettingsIcon(systemName: "magnifyingglass", backgroundColor: .gray)
-                            Text("Cari").font(.system(size: 16))
+                        
+                        // Section 5: Pemberitahuan & Lainnya
+                        Section {
+                            HStack {
+                                SettingsIcon(systemName: "bell.badge.fill", backgroundColor: .red)
+                                Text("Pemberitahuan").font(.system(size: 16))
+                            }
+                            HStack {
+                                SettingsIcon(systemName: "speaker.wave.3.fill", backgroundColor: .pink)
+                                Text("Bunyi & Haptik").font(.system(size: 16))
+                            }
+                            HStack {
+                                SettingsIcon(systemName: "moon.fill", backgroundColor: .indigo)
+                                Text("Fokus").font(.system(size: 16))
+                            }
+                            HStack {
+                                SettingsIcon(systemName: "hourglass", backgroundColor: .indigo)
+                                Text("Durasi Layar").font(.system(size: 16))
+                            }
                         }
-                        HStack {
-                            SettingsIcon(systemName: "camera.fill", backgroundColor: .gray)
-                            Text("Kamera").font(.system(size: 16))
+                        
+                        // Spacer bawah agar konten tidak tertutup search bar
+                        Section {
+                            Color.clear.frame(height: 70)
                         }
-                        HStack {
-                            SettingsIcon(systemName: "apps.iphone", backgroundColor: .blue)
-                            Text("Layar Utama & Perpustakaan App").font(.system(size: 16))
-                        }
-                        HStack {
-                            SettingsIcon(systemName: "switch.2", backgroundColor: .gray)
-                            Text("Pusat Kontrol").font(.system(size: 16))
-                        }
-                        HStack {
-                            SettingsIcon(systemName: "clock.badge.checkmark.fill", backgroundColor: .black)
-                            Text("Siaga").font(.system(size: 16))
-                        }
-                        HStack {
-                            SettingsIcon(systemName: "sun.max.fill", backgroundColor: .blue)
-                            Text("Tampilan & Kecerahan").font(.system(size: 16))
-                        }
-                        HStack {
-                            SettingsIcon(systemName: "arrow.right.circle.fill", backgroundColor: .blue)
-                            Text("Tombol Tindakan").font(.system(size: 16))
-                        }
-                        HStack {
-                            SettingsIcon(systemName: "circles.hexagongrid.fill", backgroundColor: Color(red: 0.3, green: 0.7, blue: 0.9))
-                            Text("Wallpaper").font(.system(size: 16))
-                        }
+                        .listRowBackground(Color.clear)
                     }
+                    .navigationTitle("Pengaturan")
+                    .listStyle(.insetGrouped)
+                    .scrollContentBackground(.hidden)
                     
-                    Section {
-                        HStack {
-                            SettingsIcon(systemName: "bell.badge.fill", backgroundColor: .red)
-                            Text("Pemberitahuan").font(.system(size: 16))
-                        }
-                        HStack {
-                            SettingsIcon(systemName: "speaker.wave.3.fill", backgroundColor: .pink)
-                            Text("Bunyi & Haptik").font(.system(size: 16))
-                        }
-                        HStack {
-                            SettingsIcon(systemName: "moon.fill", backgroundColor: .indigo)
-                            Text("Fokus").font(.system(size: 16))
-                        }
-                        HStack {
-                            SettingsIcon(systemName: "hourglass", backgroundColor: .indigo)
-                            Text("Durasi Layar").font(.system(size: 16))
-                        }
+                    // Floating Search Bar di Bagian Bawah
+                    HStack(spacing: 10) {
+                        Image(systemName: "magnifyingglass")
+                            .foregroundColor(.gray)
+                            .font(.system(size: 16, weight: .semibold))
+                        
+                        TextField("Cari", text: $searchText)
+                            .font(.system(size: 16))
+                            .foregroundColor(.primary)
+                        
+                        Image(systemName: "mic.fill")
+                            .foregroundColor(.gray)
+                            .font(.system(size: 16))
                     }
-                    
-                    Section {
-                        Color.clear.frame(height: 70)
-                    }
-                    .listRowBackground(Color.clear)
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 12)
+                    .background(.ultraThinMaterial)
+                    .cornerRadius(25)
+                    .padding(.horizontal, 16)
+                    .padding(.bottom, 12)
+                    .shadow(color: Color.black.opacity(0.3), radius: 6, x: 0, y: 3)
                 }
-                .navigationTitle("Pengaturan")
-                .listStyle(.insetGrouped)
-                .scrollContentBackground(.hidden)
-                
-                // Floating Search Bar
-                HStack(spacing: 10) {
-                    Image(systemName: "magnifyingglass")
-                        .foregroundColor(.gray)
-                        .font(.system(size: 16, weight: .semibold))
-                    
-                    TextField("Cari", text: $searchText)
-                        .font(.system(size: 16))
-                        .foregroundColor(.primary)
-                    
-                    Image(systemName: "mic.fill")
-                        .foregroundColor(.gray)
-                        .font(.system(size: 16))
-                }
-                .padding(.horizontal, 16)
-                .padding(.vertical, 12)
-                .background(.ultraThinMaterial)
-                .cornerRadius(25)
-                .padding(.horizontal, 16)
-                .padding(.bottom, 10)
-                .shadow(color: Color.black.opacity(0.3), radius: 6, x: 0, y: 3)
             }
+            .ignoresSafeArea()
         }
     }
 }
 
+// Komponen Ikon
 struct SettingsIcon: View {
     let systemName: String
     let backgroundColor: Color
@@ -207,6 +218,7 @@ struct SettingsIcon: View {
     }
 }
 
+// Menu "Umum"
 struct GeneralSettingsView: View {
     var body: some View {
         List {
@@ -257,6 +269,7 @@ struct GeneralSettingsView: View {
     }
 }
 
+// Menu "Mengenai"
 struct AboutSettingsView: View {
     var body: some View {
         List {
@@ -315,6 +328,7 @@ struct AboutSettingsView: View {
     }
 }
 
+// Menu "Manajemen VPN & Perangkat"
 struct VPNManagementView: View {
     var body: some View {
         List {
@@ -341,6 +355,7 @@ struct VPNManagementView: View {
     }
 }
 
+// Menu "Pengaturan Kepercayaan Sertifikat"
 struct CertificateTrustView: View {
     var body: some View {
         List {
