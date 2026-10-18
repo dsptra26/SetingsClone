@@ -7,6 +7,10 @@ struct SettingsMainView: View {
     var body: some View {
         NavigationStack {
             ZStack(alignment: .bottom) {
+                // Latar belakang hitam penuh menutupi seluruh layar
+                Color.black
+                    .ignoresSafeArea()
+                
                 List {
                     // Section 1: Profil Akun Apple
                     Section {
@@ -87,7 +91,7 @@ struct SettingsMainView: View {
                         }
                     }
                     
-                    // Section 4: Menu Umum & Lainnya
+                    // Section 4: Menu Utama Sistem
                     Section {
                         NavigationLink(destination: GeneralSettingsView()) {
                             HStack {
@@ -103,18 +107,71 @@ struct SettingsMainView: View {
                             SettingsIcon(systemName: "sparkles", backgroundColor: Color(red: 0.85, green: 0.35, blue: 0.2))
                             Text("Apple Intelligence & Siri").font(.system(size: 16))
                         }
+                        HStack {
+                            SettingsIcon(systemName: "magnifyingglass", backgroundColor: .gray)
+                            Text("Cari").font(.system(size: 16))
+                        }
+                        HStack {
+                            SettingsIcon(systemName: "camera.fill", backgroundColor: .gray)
+                            Text("Kamera").font(.system(size: 16))
+                        }
+                        HStack {
+                            SettingsIcon(systemName: "apps.iphone", backgroundColor: .blue)
+                            Text("Layar Utama & Perpustakaan App").font(.system(size: 16))
+                        }
+                        HStack {
+                            SettingsIcon(systemName: "switch.2", backgroundColor: .gray)
+                            Text("Pusat Kontrol").font(.system(size: 16))
+                        }
+                        HStack {
+                            SettingsIcon(systemName: "clock.badge.checkmark.fill", backgroundColor: .black)
+                            Text("Siaga").font(.system(size: 16))
+                        }
+                        HStack {
+                            SettingsIcon(systemName: "sun.max.fill", backgroundColor: .blue)
+                            Text("Tampilan & Kecerahan").font(.system(size: 16))
+                        }
+                        HStack {
+                            SettingsIcon(systemName: "arrow.right.circle.fill", backgroundColor: .blue)
+                            Text("Tombol Tindakan").font(.system(size: 16))
+                        }
+                        HStack {
+                            SettingsIcon(systemName: "circles.hexagongrid.fill", backgroundColor: Color(red: 0.3, green: 0.7, blue: 0.9))
+                            Text("Wallpaper").font(.system(size: 16))
+                        }
                     }
                     
-                    // Spacer bawah untuk bilah pencarian
+                    // Section 5: Pemberitahuan & Suara
                     Section {
-                        Color.clear.frame(height: 50)
+                        HStack {
+                            SettingsIcon(systemName: "bell.badge.fill", backgroundColor: .red)
+                            Text("Pemberitahuan").font(.system(size: 16))
+                        }
+                        HStack {
+                            SettingsIcon(systemName: "speaker.wave.3.fill", backgroundColor: .pink)
+                            Text("Bunyi & Haptik").font(.system(size: 16))
+                        }
+                        HStack {
+                            SettingsIcon(systemName: "moon.fill", backgroundColor: .indigo)
+                            Text("Fokus").font(.system(size: 16))
+                        }
+                        HStack {
+                            SettingsIcon(systemName: "hourglass", backgroundColor: .indigo)
+                            Text("Durasi Layar").font(.system(size: 16))
+                        }
+                    }
+                    
+                    // Spacer bawah agar konten tidak tertutup search bar
+                    Section {
+                        Color.clear.frame(height: 65)
                     }
                     .listRowBackground(Color.clear)
                 }
                 .navigationTitle("Pengaturan")
                 .listStyle(.insetGrouped)
+                .scrollContentBackground(.hidden)
                 
-                // Bilah Pencarian Mengambang di Bawah
+                // Floating Search Bar di Bagian Bawah
                 HStack(spacing: 10) {
                     Image(systemName: "magnifyingglass")
                         .foregroundColor(.gray)
@@ -133,8 +190,8 @@ struct SettingsMainView: View {
                 .background(.ultraThinMaterial)
                 .cornerRadius(25)
                 .padding(.horizontal, 16)
-                .padding(.bottom, 10)
-                .shadow(color: Color.black.opacity(0.15), radius: 5, x: 0, y: 2)
+                .padding(.bottom, 12)
+                .shadow(color: Color.black.opacity(0.3), radius: 6, x: 0, y: 3)
             }
         }
     }
@@ -204,10 +261,12 @@ struct GeneralSettingsView: View {
         .navigationTitle("Umum")
         .navigationBarTitleDisplayMode(.inline)
         .listStyle(.insetGrouped)
+        .scrollContentBackground(.hidden)
+        .background(Color.black)
     }
 }
 
-// Menu "Mengenai" (Persis Video Asli)
+// Menu "Mengenai"
 struct AboutSettingsView: View {
     var body: some View {
         List {
@@ -261,6 +320,8 @@ struct AboutSettingsView: View {
         .navigationTitle("Mengenai")
         .navigationBarTitleDisplayMode(.inline)
         .listStyle(.insetGrouped)
+        .scrollContentBackground(.hidden)
+        .background(Color.black)
     }
 }
 
@@ -270,7 +331,8 @@ struct VPNManagementView: View {
         List {
             Section {
                 HStack {
-                    Text("VPN")
+                    SettingsIcon(systemName: "network", backgroundColor: .blue)
+                    Text("VPN").font(.system(size: 16))
                     Spacer()
                     Text("Tidak Terhubung")
                         .foregroundColor(.gray)
@@ -285,6 +347,8 @@ struct VPNManagementView: View {
         .navigationTitle("Manajemen VPN & Perangkat")
         .navigationBarTitleDisplayMode(.inline)
         .listStyle(.insetGrouped)
+        .scrollContentBackground(.hidden)
+        .background(Color.black)
     }
 }
 
@@ -320,5 +384,7 @@ struct CertificateTrustView: View {
         .navigationTitle("Pengaturan Kepercayaan Sertifikat")
         .navigationBarTitleDisplayMode(.inline)
         .listStyle(.insetGrouped)
+        .scrollContentBackground(.hidden)
+        .background(Color.black)
     }
 }
