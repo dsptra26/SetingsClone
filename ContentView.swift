@@ -7,12 +7,10 @@ struct SettingsMainView: View {
     var body: some View {
         NavigationStack {
             ZStack(alignment: .bottom) {
-                // Memastikan latar belakang hitam menutupi seluruh layar
                 Color.black
                     .ignoresSafeArea()
                 
                 List {
-                    // Section 1: Profil Akun Apple
                     Section {
                         HStack(spacing: 15) {
                             Circle()
@@ -35,7 +33,6 @@ struct SettingsMainView: View {
                         .padding(.vertical, 4)
                     }
                     
-                    // Section 2: Banner Perbarui iOS
                     Section {
                         HStack {
                             Text("Perbarui ke iOS 27.0.1")
@@ -52,7 +49,6 @@ struct SettingsMainView: View {
                         }
                     }
                     
-                    // Section 3: Konektivitas & Baterai (Logo Bluetooth Lengkap)
                     Section {
                         HStack {
                             SettingsIcon(systemName: "airplane", backgroundColor: .orange)
@@ -91,7 +87,6 @@ struct SettingsMainView: View {
                         }
                     }
                     
-                    // Section 4: Menu Utama Sistem
                     Section {
                         NavigationLink(destination: GeneralSettingsView()) {
                             HStack {
@@ -141,7 +136,6 @@ struct SettingsMainView: View {
                         }
                     }
                     
-                    // Section 5: Pemberitahuan & Lainnya
                     Section {
                         HStack {
                             SettingsIcon(systemName: "bell.badge.fill", backgroundColor: .red)
@@ -161,7 +155,6 @@ struct SettingsMainView: View {
                         }
                     }
                     
-                    // Spacer bawah agar konten tidak tertutup search bar
                     Section {
                         Color.clear.frame(height: 70)
                     }
@@ -171,7 +164,7 @@ struct SettingsMainView: View {
                 .listStyle(.insetGrouped)
                 .scrollContentBackground(.hidden)
                 
-                // Floating Search Bar di Bagian Bawah
+                // Floating Search Bar
                 HStack(spacing: 10) {
                     Image(systemName: "magnifyingglass")
                         .foregroundColor(.gray)
@@ -190,14 +183,13 @@ struct SettingsMainView: View {
                 .background(.ultraThinMaterial)
                 .cornerRadius(25)
                 .padding(.horizontal, 16)
-                .padding(.bottom, 12)
+                .padding(.bottom, 10)
                 .shadow(color: Color.black.opacity(0.3), radius: 6, x: 0, y: 3)
             }
         }
     }
 }
 
-// Komponen Ikon
 struct SettingsIcon: View {
     let systemName: String
     let backgroundColor: Color
@@ -215,7 +207,6 @@ struct SettingsIcon: View {
     }
 }
 
-// Menu "Umum"
 struct GeneralSettingsView: View {
     var body: some View {
         List {
@@ -266,7 +257,6 @@ struct GeneralSettingsView: View {
     }
 }
 
-// Menu "Mengenai"
 struct AboutSettingsView: View {
     var body: some View {
         List {
@@ -325,7 +315,6 @@ struct AboutSettingsView: View {
     }
 }
 
-// Menu "Manajemen VPN & Perangkat"
 struct VPNManagementView: View {
     var body: some View {
         List {
@@ -352,7 +341,6 @@ struct VPNManagementView: View {
     }
 }
 
-// Menu "Pengaturan Kepercayaan Sertifikat"
 struct CertificateTrustView: View {
     var body: some View {
         List {
