@@ -22,6 +22,7 @@ jobs:
                      -scheme SettingsClone \
                      -configuration Release \
                      -sdk iphoneos \
+                     INFOPLIST_FILE=Info.plist \
                      -derivedDataPath build \
                      CODE_SIGNING_ALLOWED=NO \
                      CODE_SIGNING_REQUIRED=NO \
