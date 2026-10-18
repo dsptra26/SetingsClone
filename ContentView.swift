@@ -1,18 +1,18 @@
 import SwiftUI
 
-// Shapes Vektor Logo Bluetooth Presisi Asli iOS
+// Shapes Vektor Logo Bluetooth Presisi Sisi Asli iOS
 struct OfficialBluetoothLogo: Shape {
     func path(in rect: CGRect) -> Path {
         var path = Path()
         let w = rect.width
         let h = rect.height
         
-        path.move(to: CGPoint(x: w * 0.32, y: h * 0.28))
+        path.move(to: CGPoint(x: w * 0.32, y: h * 0.26))
         path.addLine(to: CGPoint(x: w * 0.68, y: h * 0.52))
-        path.addLine(to: CGPoint(x: w * 0.50, y: h * 0.15))
-        path.addLine(to: CGPoint(x: w * 0.50, y: h * 0.85))
+        path.addLine(to: CGPoint(x: w * 0.50, y: h * 0.14))
+        path.addLine(to: CGPoint(x: w * 0.50, y: h * 0.86))
         path.addLine(to: CGPoint(x: w * 0.68, y: h * 0.48))
-        path.addLine(to: CGPoint(x: w * 0.32, y: h * 0.72))
+        path.addLine(to: CGPoint(x: w * 0.32, y: h * 0.74))
         
         return path
     }
@@ -28,10 +28,10 @@ struct CircleBackButton: View {
         }) {
             ZStack {
                 Circle()
-                    .fill(Color(white: 0.18))
-                    .frame(width: 32, height: 32)
+                    .fill(Color(white: 0.2))
+                    .frame(width: 30, height: 30)
                 Image(systemName: "chevron.left")
-                    .font(.system(size: 15, weight: .bold))
+                    .font(.system(size: 14, weight: .bold))
                     .foregroundColor(.white)
             }
         }
@@ -58,22 +58,22 @@ struct SettingsMainView: View {
                                     startPoint: .topLeading,
                                     endPoint: .bottomTrailing
                                 ))
-                                .frame(width: 58, height: 58)
+                                .frame(width: 60, height: 60)
                             
                             VStack(alignment: .leading, spacing: 3) {
                                 Text("Dimas Saputra")
-                                    .font(.system(size: 19, weight: .semibold))
+                                    .font(.system(size: 20, weight: .semibold))
                                     .foregroundColor(.white)
                                 Text("Akun Apple, iCloud, dan lainnya")
-                                    .font(.system(size: 12))
+                                    .font(.system(size: 13))
                                     .foregroundColor(.gray)
                             }
                             Spacer()
                             Image(systemName: "chevron.right")
-                                .font(.system(size: 14, weight: .semibold))
+                                .font(.system(size: 13, weight: .semibold))
                                 .foregroundColor(Color(UIColor.tertiaryLabel))
                         }
-                        .padding(.vertical, 6)
+                        .padding(.vertical, 4)
                     }
                     
                     // Section 2: Banner Perbarui iOS
@@ -92,10 +92,10 @@ struct SettingsMainView: View {
                                     .foregroundColor(.white)
                             }
                             Image(systemName: "chevron.right")
-                                .font(.system(size: 14, weight: .semibold))
+                                .font(.system(size: 13, weight: .semibold))
                                 .foregroundColor(Color(UIColor.tertiaryLabel))
                         }
-                        .padding(.vertical, 4)
+                        .padding(.vertical, 2)
                     }
                     
                     // Section 3: Konektivitas & Baterai
@@ -107,7 +107,7 @@ struct SettingsMainView: View {
                             Toggle("", isOn: $isAirplaneModeOn)
                                 .labelsHidden()
                         }
-                        .padding(.vertical, 2)
+                        .padding(.vertical, 3)
                         
                         NavigationLink(destination: Text("Wi-Fi")) {
                             HStack {
@@ -116,7 +116,7 @@ struct SettingsMainView: View {
                                 Spacer()
                                 Text("AWIS D ROKET").font(.system(size: 15)).foregroundColor(.gray)
                             }
-                            .padding(.vertical, 2)
+                            .padding(.vertical, 3)
                         }
                         
                         NavigationLink(destination: Text("Bluetooth")) {
@@ -126,7 +126,7 @@ struct SettingsMainView: View {
                                 Spacer()
                                 Text("Tidak Terhubung").font(.system(size: 15)).foregroundColor(.gray)
                             }
-                            .padding(.vertical, 2)
+                            .padding(.vertical, 3)
                         }
                         
                         NavigationLink(destination: Text("Seluler")) {
@@ -136,7 +136,7 @@ struct SettingsMainView: View {
                                 Spacer()
                                 Text("Mati").font(.system(size: 15)).foregroundColor(.gray)
                             }
-                            .padding(.vertical, 2)
+                            .padding(.vertical, 3)
                         }
                         
                         NavigationLink(destination: Text("Hotspot")) {
@@ -146,7 +146,7 @@ struct SettingsMainView: View {
                                 Spacer()
                                 Text("Mati").font(.system(size: 15)).foregroundColor(.gray)
                             }
-                            .padding(.vertical, 2)
+                            .padding(.vertical, 3)
                         }
                         
                         NavigationLink(destination: Text("Baterai")) {
@@ -154,7 +154,7 @@ struct SettingsMainView: View {
                                 SettingsIcon(systemName: "battery.100", backgroundColor: .green)
                                 Text("Baterai").font(.system(size: 16)).foregroundColor(.white)
                             }
-                            .padding(.vertical, 2)
+                            .padding(.vertical, 3)
                         }
                     }
                     
@@ -165,77 +165,77 @@ struct SettingsMainView: View {
                                 SettingsIcon(systemName: "gear", backgroundColor: .gray)
                                 Text("Umum").font(.system(size: 16)).foregroundColor(.white)
                             }
-                            .padding(.vertical, 2)
+                            .padding(.vertical, 3)
                         }
                         NavigationLink(destination: Text("Aksesibilitas")) {
                             HStack {
                                 SettingsIcon(systemName: "accessibility", backgroundColor: .blue)
                                 Text("Aksesibilitas").font(.system(size: 16)).foregroundColor(.white)
                             }
-                            .padding(.vertical, 2)
+                            .padding(.vertical, 3)
                         }
                         NavigationLink(destination: Text("Siri")) {
                             HStack {
                                 SettingsIcon(systemName: "sparkles", backgroundColor: Color(red: 0.92, green: 0.35, blue: 0.18))
                                 Text("Apple Intelligence & Siri").font(.system(size: 16)).foregroundColor(.white)
                             }
-                            .padding(.vertical, 2)
+                            .padding(.vertical, 3)
                         }
                         NavigationLink(destination: Text("Cari")) {
                             HStack {
                                 SettingsIcon(systemName: "magnifyingglass", backgroundColor: .gray)
                                 Text("Cari").font(.system(size: 16)).foregroundColor(.white)
                             }
-                            .padding(.vertical, 2)
+                            .padding(.vertical, 3)
                         }
                         NavigationLink(destination: Text("Kamera")) {
                             HStack {
                                 SettingsIcon(systemName: "camera.fill", backgroundColor: .gray)
                                 Text("Kamera").font(.system(size: 16)).foregroundColor(.white)
                             }
-                            .padding(.vertical, 2)
+                            .padding(.vertical, 3)
                         }
                         NavigationLink(destination: Text("Layar Utama")) {
                             HStack {
                                 SettingsIcon(systemName: "apps.iphone", backgroundColor: .blue)
                                 Text("Layar Utama & Perpustakaan App").font(.system(size: 16)).foregroundColor(.white)
                             }
-                            .padding(.vertical, 2)
+                            .padding(.vertical, 3)
                         }
                         NavigationLink(destination: Text("Pusat Kontrol")) {
                             HStack {
                                 SettingsIcon(systemName: "switch.2", backgroundColor: .gray)
                                 Text("Pusat Kontrol").font(.system(size: 16)).foregroundColor(.white)
                             }
-                            .padding(.vertical, 2)
+                            .padding(.vertical, 3)
                         }
                         NavigationLink(destination: Text("Siaga")) {
                             HStack {
                                 SettingsIcon(systemName: "clock.badge.checkmark.fill", backgroundColor: .black)
                                 Text("Siaga").font(.system(size: 16)).foregroundColor(.white)
                             }
-                            .padding(.vertical, 2)
+                            .padding(.vertical, 3)
                         }
                         NavigationLink(destination: Text("Tampilan")) {
                             HStack {
                                 SettingsIcon(systemName: "sun.max.fill", backgroundColor: .blue)
                                 Text("Tampilan & Kecerahan").font(.system(size: 16)).foregroundColor(.white)
                             }
-                            .padding(.vertical, 2)
+                            .padding(.vertical, 3)
                         }
                         NavigationLink(destination: Text("Tombol Tindakan")) {
                             HStack {
                                 SettingsIcon(systemName: "arrow.right.circle.fill", backgroundColor: .blue)
                                 Text("Tombol Tindakan").font(.system(size: 16)).foregroundColor(.white)
                             }
-                            .padding(.vertical, 2)
+                            .padding(.vertical, 3)
                         }
                         NavigationLink(destination: Text("Wallpaper")) {
                             HStack {
                                 SettingsIcon(systemName: "circles.hexagongrid.fill", backgroundColor: Color(red: 0.3, green: 0.7, blue: 0.9))
                                 Text("Wallpaper").font(.system(size: 16)).foregroundColor(.white)
                             }
-                            .padding(.vertical, 2)
+                            .padding(.vertical, 3)
                         }
                     }
                     
@@ -246,33 +246,33 @@ struct SettingsMainView: View {
                                 SettingsIcon(systemName: "bell.badge.fill", backgroundColor: .red)
                                 Text("Pemberitahuan").font(.system(size: 16)).foregroundColor(.white)
                             }
-                            .padding(.vertical, 2)
+                            .padding(.vertical, 3)
                         }
                         NavigationLink(destination: Text("Bunyi & Haptik")) {
                             HStack {
                                 SettingsIcon(systemName: "speaker.wave.3.fill", backgroundColor: Color(red: 0.95, green: 0.25, blue: 0.45))
                                 Text("Bunyi & Haptik").font(.system(size: 16)).foregroundColor(.white)
                             }
-                            .padding(.vertical, 2)
+                            .padding(.vertical, 3)
                         }
                         NavigationLink(destination: Text("Fokus")) {
                             HStack {
                                 SettingsIcon(systemName: "moon.fill", backgroundColor: .indigo)
                                 Text("Fokus").font(.system(size: 16)).foregroundColor(.white)
                             }
-                            .padding(.vertical, 2)
+                            .padding(.vertical, 3)
                         }
                         NavigationLink(destination: Text("Durasi Layar")) {
                             HStack {
                                 SettingsIcon(systemName: "hourglass", backgroundColor: .indigo)
                                 Text("Durasi Layar").font(.system(size: 16)).foregroundColor(.white)
                             }
-                            .padding(.vertical, 2)
+                            .padding(.vertical, 3)
                         }
                     }
                     
                     Section {
-                        Color.clear.frame(height: 55)
+                        Color.clear.frame(height: 65)
                     }
                     .listRowBackground(Color.clear)
                 }
@@ -280,10 +280,10 @@ struct SettingsMainView: View {
                 .listStyle(.insetGrouped)
                 .scrollContentBackground(.hidden)
                 
-                // Floating Search Bar Bottom - Transparan & Presisi
-                HStack(spacing: 10) {
+                // Floating Search Bar Bottom - Super Halus & Proporsional
+                HStack(spacing: 12) {
                     Image(systemName: "magnifyingglass")
-                        .foregroundColor(Color.white.opacity(0.5))
+                        .foregroundColor(Color.white.opacity(0.45))
                         .font(.system(size: 15, weight: .semibold))
                     
                     TextField("Cari", text: $searchText)
@@ -291,34 +291,34 @@ struct SettingsMainView: View {
                         .foregroundColor(.white)
                     
                     Image(systemName: "mic.fill")
-                        .foregroundColor(Color.white.opacity(0.5))
+                        .foregroundColor(Color.white.opacity(0.45))
                         .font(.system(size: 15))
                 }
-                .padding(.horizontal, 14)
-                .padding(.vertical, 9)
+                .padding(.horizontal, 16)
+                .padding(.vertical, 11)
                 .background(
-                    RoundedRectangle(cornerRadius: 22, style: .continuous)
-                        .fill(Color(white: 0.22, opacity: 0.55))
-                        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 22, style: .continuous))
+                    RoundedRectangle(cornerRadius: 24, style: .continuous)
+                        .fill(Color(white: 0.18, opacity: 0.65))
+                        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 24, style: .continuous))
                 )
                 .padding(.horizontal, 16)
-                .padding(.bottom, 2)
+                .padding(.bottom, 6)
             }
         }
     }
 }
 
-// Komponen Ikon Bluetooth
+// Komponen Ikon Bluetooth Proporsional
 struct CustomBluetoothIcon: View {
     var body: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 6.5, style: .continuous)
+            RoundedRectangle(cornerRadius: 7, style: .continuous)
                 .fill(Color(red: 0.0, green: 0.48, blue: 1.0))
                 .frame(width: 29, height: 29)
             
             OfficialBluetoothLogo()
-                .stroke(Color.white, style: StrokeStyle(lineWidth: 2.2, lineCap: .round, lineJoin: .round))
-                .frame(width: 11, height: 16)
+                .stroke(Color.white, style: StrokeStyle(lineWidth: 2.4, lineCap: .round, lineJoin: .round))
+                .frame(width: 12, height: 17)
         }
         .padding(.trailing, 6)
     }
@@ -331,7 +331,7 @@ struct SettingsIcon: View {
     
     var body: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 6.5, style: .continuous)
+            RoundedRectangle(cornerRadius: 7, style: .continuous)
                 .fill(backgroundColor)
                 .frame(width: 29, height: 29)
             Image(systemName: systemName)
@@ -350,39 +350,44 @@ struct GeneralSettingsView: View {
                 NavigationLink(destination: AboutSettingsView()) {
                     Text("Mengenai").foregroundColor(.white)
                 }
+                .padding(.vertical, 3)
                 Text("Pembaruan Perangkat Lunak").foregroundColor(.white)
+                    .padding(.vertical, 3)
                 Text("Penyimpanan iPhone").foregroundColor(.white)
+                    .padding(.vertical, 3)
             }
             Section {
                 Text("AppleCare & Garansi").foregroundColor(.white)
+                    .padding(.vertical, 3)
             }
             Section {
-                Text("AirDrop & AirPlay").foregroundColor(.white)
-                Text("AirPlay & Kontinuitas").foregroundColor(.white)
-                Text("Gambar dalam Gambar").foregroundColor(.white)
-                Text("Pengambilan Layar").foregroundColor(.white)
-                Text("CarPlay").foregroundColor(.white)
+                Text("AirDrop & AirPlay").foregroundColor(.white).padding(.vertical, 3)
+                Text("AirPlay & Kontinuitas").foregroundColor(.white).padding(.vertical, 3)
+                Text("Gambar dalam Gambar").foregroundColor(.white).padding(.vertical, 3)
+                Text("Pengambilan Layar").foregroundColor(.white).padding(.vertical, 3)
+                Text("CarPlay").foregroundColor(.white).padding(.vertical, 3)
             }
             Section {
-                Text("Bahasa & Wilayah").foregroundColor(.white)
-                Text("Font").foregroundColor(.white)
-                Text("Isi-Auto & Kata Sandi").foregroundColor(.white)
-                Text("Kamus").foregroundColor(.white)
-                Text("Papan Ketik").foregroundColor(.white)
-                Text("Segarkan App di Latar").foregroundColor(.white)
-                Text("Tanggal & Waktu").foregroundColor(.white)
+                Text("Bahasa & Wilayah").foregroundColor(.white).padding(.vertical, 3)
+                Text("Font").foregroundColor(.white).padding(.vertical, 3)
+                Text("Isi-Auto & Kata Sandi").foregroundColor(.white).padding(.vertical, 3)
+                Text("Kamus").foregroundColor(.white).padding(.vertical, 3)
+                Text("Papan Ketik").foregroundColor(.white).padding(.vertical, 3)
+                Text("Segarkan App di Latar").foregroundColor(.white).padding(.vertical, 3)
+                Text("Tanggal & Waktu").foregroundColor(.white).padding(.vertical, 3)
             }
             Section {
-                Text("Penyedia TV").foregroundColor(.white)
+                Text("Penyedia TV").foregroundColor(.white).padding(.vertical, 3)
             }
             Section {
                 NavigationLink(destination: VPNManagementView()) {
                     Text("Manajemen VPN & Perangkat").foregroundColor(.white)
                 }
+                .padding(.vertical, 3)
             }
             Section {
-                Text("Legal & Pengatur").foregroundColor(.white)
-                Text("Transfer atau Atur Ulang iPhone").foregroundColor(.white)
+                Text("Legal & Pengatur").foregroundColor(.white).padding(.vertical, 3)
+                Text("Transfer atau Atur Ulang iPhone").foregroundColor(.white).padding(.vertical, 3)
             }
         }
         .navigationTitle("Umum")
@@ -404,50 +409,51 @@ struct AboutSettingsView: View {
     var body: some View {
         List {
             Section {
-                HStack { Text("Nama"); Spacer(); Text("iPhone Dimas").foregroundColor(.gray) }
-                HStack { Text("Versi iOS"); Spacer(); Text("26.5").foregroundColor(.gray) }
-                HStack { Text("Nama Model"); Spacer(); Text("iPhone 17 Pro Max").foregroundColor(.gray) }
-                HStack { Text("Nomor Model"); Spacer(); Text("MFYP4PA/A").foregroundColor(.gray) }
-                HStack { Text("Nomor Seri"); Spacer(); Text("KJX6WK6357").foregroundColor(.gray) }
+                HStack { Text("Nama"); Spacer(); Text("iPhone Dimas").foregroundColor(.gray) }.padding(.vertical, 3)
+                HStack { Text("Versi iOS"); Spacer(); Text("26.5").foregroundColor(.gray) }.padding(.vertical, 3)
+                HStack { Text("Nama Model"); Spacer(); Text("iPhone 17 Pro Max").foregroundColor(.gray) }.padding(.vertical, 3)
+                HStack { Text("Nomor Model"); Spacer(); Text("MFYP4PA/A").foregroundColor(.gray) }.padding(.vertical, 3)
+                HStack { Text("Nomor Seri"); Spacer(); Text("KJX6WK6357").foregroundColor(.gray) }.padding(.vertical, 3)
             }
             
             Section {
-                HStack { Text("Garansi Terbatas"); Spacer(); Text("Kedaluwarsa pada 27/12/26").foregroundColor(.gray) }
+                HStack { Text("Garansi Terbatas"); Spacer(); Text("Kedaluwarsa pada 27/12/26").foregroundColor(.gray) }.padding(.vertical, 3)
             }
             
             Section {
-                HStack { Text("Lagu"); Spacer(); Text("0").foregroundColor(.gray) }
-                HStack { Text("Video"); Spacer(); Text("1.029").foregroundColor(.gray) }
-                HStack { Text("Foto"); Spacer(); Text("7.862").foregroundColor(.gray) }
-                HStack { Text("Aplikasi"); Spacer(); Text("39").foregroundColor(.gray) }
-                HStack { Text("Kapasitas"); Spacer(); Text("256 GB").foregroundColor(.gray) }
-                HStack { Text("Tersedia"); Spacer(); Text("157,19 GB").foregroundColor(.gray) }
+                HStack { Text("Lagu"); Spacer(); Text("0").foregroundColor(.gray) }.padding(.vertical, 3)
+                HStack { Text("Video"); Spacer(); Text("1.029").foregroundColor(.gray) }.padding(.vertical, 3)
+                HStack { Text("Foto"); Spacer(); Text("7.862").foregroundColor(.gray) }.padding(.vertical, 3)
+                HStack { Text("Aplikasi"); Spacer(); Text("39").foregroundColor(.gray) }.padding(.vertical, 3)
+                HStack { Text("Kapasitas"); Spacer(); Text("256 GB").foregroundColor(.gray) }.padding(.vertical, 3)
+                HStack { Text("Tersedia"); Spacer(); Text("157,19 GB").foregroundColor(.gray) }.padding(.vertical, 3)
             }
             
             Section {
-                HStack { Text("Alamat Wi-Fi"); Spacer(); Text("B8:01:1F:BA:90:38").foregroundColor(.gray) }
-                HStack { Text("Bluetooth"); Spacer(); Text("B8:01:1F:B8:D8:67").foregroundColor(.gray) }
-                HStack { Text("Firmware Modem"); Spacer(); Text("1.60.02").foregroundColor(.gray) }
-                HStack { Text("SEID"); Spacer(); Text("").foregroundColor(.gray) }
-                HStack { Text("EID"); Spacer(); Text("89049032020008884800234954216871").font(.system(size: 13)).foregroundColor(.gray) }
-                HStack { Text("Kunci Operator"); Spacer(); Text("Tidak ada pembatasan SIM").foregroundColor(.gray) }
+                HStack { Text("Alamat Wi-Fi"); Spacer(); Text("B8:01:1F:BA:90:38").foregroundColor(.gray) }.padding(.vertical, 3)
+                HStack { Text("Bluetooth"); Spacer(); Text("B8:01:1F:B8:D8:67").foregroundColor(.gray) }.padding(.vertical, 3)
+                HStack { Text("Firmware Modem"); Spacer(); Text("1.60.02").foregroundColor(.gray) }.padding(.vertical, 3)
+                HStack { Text("SEID"); Spacer(); Text("").foregroundColor(.gray) }.padding(.vertical, 3)
+                HStack { Text("EID"); Spacer(); Text("89049032020008884800234954216871").font(.system(size: 13)).foregroundColor(.gray) }.padding(.vertical, 3)
+                HStack { Text("Kunci Operator"); Spacer(); Text("Tidak ada pembatasan SIM").foregroundColor(.gray) }.padding(.vertical, 3)
             }
             
             Section(header: Text("SIM Fisik")) {
-                HStack { Text("Jaringan"); Spacer(); Text("INDOSATOOREDOO").foregroundColor(.gray) }
-                HStack { Text("Operator"); Spacer(); Text("INDOSAT 70.0").foregroundColor(.gray) }
-                HStack { Text("IMEI"); Spacer(); Text("35 260231 063492 5").foregroundColor(.gray) }
-                HStack { Text("ICCID"); Spacer(); Text("89620130003168785752").font(.system(size: 13)).foregroundColor(.gray) }
+                HStack { Text("Jaringan"); Spacer(); Text("INDOSATOOREDOO").foregroundColor(.gray) }.padding(.vertical, 3)
+                HStack { Text("Operator"); Spacer(); Text("INDOSAT 70.0").foregroundColor(.gray) }.padding(.vertical, 3)
+                HStack { Text("IMEI"); Spacer(); Text("35 260231 063492 5").foregroundColor(.gray) }.padding(.vertical, 3)
+                HStack { Text("ICCID"); Spacer(); Text("89620130003168785752").font(.system(size: 13)).foregroundColor(.gray) }.padding(.vertical, 3)
             }
             
             Section(header: Text("SIM yang Tersedia")) {
-                HStack { Text("IMEI2"); Spacer(); Text("35 260231 067993 8").foregroundColor(.gray) }
+                HStack { Text("IMEI2"); Spacer(); Text("35 260231 067993 8").foregroundColor(.gray) }.padding(.vertical, 3)
             }
             
             Section {
                 NavigationLink(destination: CertificateTrustView()) {
                     Text("Pengaturan Kepercayaan Sertifikat").foregroundColor(.white)
                 }
+                .padding(.vertical, 3)
             }
         }
         .navigationTitle("Mengenai")
@@ -464,7 +470,7 @@ struct AboutSettingsView: View {
     }
 }
 
-// Menu "Manajemen VPN & Perangkat" - Sesuai Foto
+// Menu "Manajemen VPN & Perangkat"
 struct VPNManagementView: View {
     var body: some View {
         List {
@@ -476,7 +482,7 @@ struct VPNManagementView: View {
                         Spacer()
                         Text("Tidak Terhubung").foregroundColor(.gray)
                     }
-                    .padding(.vertical, 2)
+                    .padding(.vertical, 3)
                 }
             }
             
@@ -486,7 +492,7 @@ struct VPNManagementView: View {
                         .font(.system(size: 15))
                         .foregroundColor(.blue)
                 }
-                .padding(.vertical, 2)
+                .padding(.vertical, 3)
             }
         }
         .navigationTitle("Manajemen VPN & Perangkat")
@@ -503,7 +509,7 @@ struct VPNManagementView: View {
     }
 }
 
-// Menu "Pengaturan Kepercayaan Sertifikat" - Sesuai Foto
+// Menu "Pengaturan Kepercayaan Sertifikat"
 struct CertificateTrustView: View {
     var body: some View {
         List {
@@ -520,14 +526,14 @@ struct CertificateTrustView: View {
                     Spacer()
                     Text("2026040100").foregroundColor(.gray)
                 }
-                .padding(.vertical, 2)
+                .padding(.vertical, 3)
                 
                 HStack {
                     Text("Versi Aset Kepercayaan").foregroundColor(.white)
                     Spacer()
                     Text("1013").foregroundColor(.gray)
                 }
-                .padding(.vertical, 2)
+                .padding(.vertical, 3)
             }
         }
         .navigationTitle("Pengaturan Kepercayaan Sertifikat")
