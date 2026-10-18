@@ -1,14 +1,5 @@
 import SwiftUI
 
-@main
-struct SettingsCloneApp: App {
-    var body: some Scene {
-        WindowGroup {
-            SettingsMainView()
-        }
-    }
-}
-
 struct SettingsMainView: View {
     @State private var isAirplaneModeOn = false
     @State private var searchText = ""
@@ -216,7 +207,7 @@ struct GeneralSettingsView: View {
     }
 }
 
-// Menu "Mengenai" (Sesuai Persis Video Asli)[span_3](start_span)[span_3](end_span)
+// Menu "Mengenai" (Persis Video Asli)
 struct AboutSettingsView: View {
     var body: some View {
         List {
