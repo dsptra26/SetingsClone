@@ -1,5 +1,4 @@
 import SwiftUI
-import FirebaseDatabase
 
 // Logo Bluetooth Asli & Proporsional Sesuai iOS
 struct OfficialBluetoothLogo: Shape {
@@ -57,7 +56,7 @@ extension View {
     }
 }
 
-// --- UTAMA DENGAN SISTEM KODE HARIAN & KILL SWITCH SERVER ---
+// --- UTAMA DENGAN SISTEM KODE HARIAN & KILL SWITCH REST API ---
 struct ContentView: View {
     @AppStorage("isUnlocked") private var isUnlocked = false
     @AppStorage("activationTimestamp") private var activationTimestamp: Double = 0
@@ -67,8 +66,11 @@ struct ContentView: View {
     @State private var isServerBlocked = false
     @State private var isLoading = true
     
-    // Kode rahasia harian yang Anda tentukan
+    // Kode rahasia harian yang kamu tentukan
     let validDailyCode = "IPHONE2026"
+    
+    // URL Realtime Database Firebase kamu (Wajib diakhiri .json)
+    let firebaseURL = "https://settings-clone-default-rtdb.asia-southeast1.firebasedatabase.app/access_control/status.json"
 
     var body: some View {
         Group {
@@ -79,7 +81,7 @@ struct ContentView: View {
                         .progressViewStyle(CircularProgressViewStyle(tint: .white))
                 }
             } else if isServerBlocked {
-                // Tampilan jika Anda mematikan akses seketika dari server
+                // Tampilan jika kamu mematikan akses seketika dari server
                 ZStack {
                     Color.black.ignoresSafeArea()
                     VStack(spacing: 16) {
@@ -156,24 +158,29 @@ struct ContentView: View {
             }
         }
         .onAppear {
-            checkServerKillSwitch()
+            checkServerKillSwitchREST()
         }
     }
     
-    func checkServerKillSwitch() {
-        let ref = Database.database().reference().child("access_control/status")
-        ref.observe(.value) { snapshot in
-            if let status = snapshot.value as? String {
-                if status == "blocked" {
-                    self.isServerBlocked = true
-                } else {
-                    self.isServerBlocked = false
-                }
-            } else {
-                self.isServerBlocked = false
-            }
+    func checkServerKillSwitchREST() {
+        guard let url = URL(string: firebaseURL) else {
             self.isLoading = false
+            return
         }
+        
+        URLSession.shared.dataTask(with: url) { data, _, _ in
+            DispatchQueue.main.async {
+                if let data = data, let rawString = String(data: data, encoding: .utf8) {
+                    let status = rawString.replacingOccurrences(of: "\"", with: "").trimmingCharacters(in: .whitespacesAndNewlines)
+                    if status == "blocked" {
+                        self.isServerBlocked = true
+                    } else {
+                        self.isServerBlocked = false
+                    }
+                }
+                self.isLoading = false
+            }
+        }.resume()
     }
 }
 
