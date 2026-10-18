@@ -7,7 +7,7 @@ struct SettingsMainView: View {
     var body: some View {
         NavigationStack {
             ZStack(alignment: .bottom) {
-                // Background hitam penuh menutupi seluruh layar
+                // Memastikan latar belakang hitam menutupi seluruh layar
                 Color.black
                     .ignoresSafeArea()
                 
@@ -52,7 +52,7 @@ struct SettingsMainView: View {
                         }
                     }
                     
-                    // Section 3: Konektivitas & Baterai (Bluetooth Dikembalikan)
+                    // Section 3: Konektivitas & Baterai (Logo Bluetooth Lengkap)
                     Section {
                         HStack {
                             SettingsIcon(systemName: "airplane", backgroundColor: .orange)
@@ -170,7 +170,6 @@ struct SettingsMainView: View {
                 .navigationTitle("Pengaturan")
                 .listStyle(.insetGrouped)
                 .scrollContentBackground(.hidden)
-                .ignoresSafeArea(.all, edges: [.top, .bottom])
                 
                 // Floating Search Bar di Bagian Bawah
                 HStack(spacing: 10) {
@@ -191,7 +190,7 @@ struct SettingsMainView: View {
                 .background(.ultraThinMaterial)
                 .cornerRadius(25)
                 .padding(.horizontal, 16)
-                .padding(.bottom, 10)
+                .padding(.bottom, 12)
                 .shadow(color: Color.black.opacity(0.3), radius: 6, x: 0, y: 3)
             }
         }
@@ -389,4 +388,3 @@ struct CertificateTrustView: View {
         .background(Color.black)
     }
 }
-
