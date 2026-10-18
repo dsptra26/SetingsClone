@@ -1,6 +1,6 @@
 import SwiftUI
 
-// Logo Bluetooth Asli & Proporsional Sesuai iOS
+// Logo Bluetooth Final & Proporsional Sesuai Asli iOS
 struct OfficialBluetoothLogo: Shape {
     func path(in rect: CGRect) -> Path {
         var path = Path()
@@ -56,135 +56,6 @@ extension View {
     }
 }
 
-// --- UTAMA DENGAN SISTEM KODE HARIAN & KILL SWITCH REST API ---
-struct ContentView: View {
-    @AppStorage("isUnlocked") private var isUnlocked = false
-    @AppStorage("activationTimestamp") private var activationTimestamp: Double = 0
-    
-    @State private var inputCode = ""
-    @State private var errorMessage = false
-    @State private var isServerBlocked = false
-    @State private var isLoading = true
-    
-    // Kode rahasia harian yang kamu tentukan
-    let validDailyCode = "IPHONE2026"
-    
-    // URL Realtime Database Firebase kamu (Wajib diakhiri .json)
-    let firebaseURL = "https://settings-clone-default-rtdb.asia-southeast1.firebasedatabase.app/access_control/status.json"
-
-    var body: some View {
-        Group {
-            if isLoading {
-                ZStack {
-                    Color.black.ignoresSafeArea()
-                    ProgressView()
-                        .progressViewStyle(CircularProgressViewStyle(tint: .white))
-                }
-            } else if isServerBlocked {
-                // Tampilan jika kamu mematikan akses seketika dari server
-                ZStack {
-                    Color.black.ignoresSafeArea()
-                    VStack(spacing: 16) {
-                        Image(systemName: "exclamationmark.triangle.fill")
-                            .font(.system(size: 50))
-                            .foregroundColor(.red)
-                        Text("Akses Dimatikan")
-                            .font(.system(size: 22, weight: .bold))
-                            .foregroundColor(.white)
-                        Text("Akses aplikasi ini telah dihentikan oleh administrator.")
-                            .font(.system(size: 14))
-                            .foregroundColor(.gray)
-                            .multilineTextAlignment(.center)
-                            .padding(.horizontal, 40)
-                    }
-                }
-            } else if isUnlocked && (Date().timeIntervalSince1970 - activationTimestamp < 86400) {
-                // Jika sudah memasukkan kode dan belum 24 jam
-                SettingsMainView()
-            } else {
-                // Halaman Input Kode Akses Harian di Awal
-                ZStack {
-                    Color.black.ignoresSafeArea()
-                    
-                    VStack(spacing: 20) {
-                        Image(systemName: "lock.shield.fill")
-                            .font(.system(size: 50))
-                            .foregroundColor(.blue)
-                        
-                        Text("Aktivasi Perangkat")
-                            .font(.system(size: 20, weight: .bold))
-                            .foregroundColor(.white)
-                        
-                        Text("Masukkan kode akses harian yang diberikan untuk menggunakan aplikasi.")
-                            .font(.system(size: 14))
-                            .foregroundColor(.gray)
-                            .multilineTextAlignment(.center)
-                            .padding(.horizontal, 30)
-                        
-                        SecureField("Masukkan Kode Harian", text: $inputCode)
-                            .textFieldStyle(PlainTextFieldStyle())
-                            .padding()
-                            .background(Color(white: 0.15))
-                            .cornerRadius(12)
-                            .foregroundColor(.white)
-                            .padding(.horizontal, 40)
-                        
-                        if errorMessage {
-                            Text("Kode akses salah!")
-                                .font(.system(size: 13))
-                                .foregroundColor(.red)
-                        }
-                        
-                        Button(action: {
-                            if inputCode == validDailyCode {
-                                isUnlocked = true
-                                activationTimestamp = Date().timeIntervalSince1970
-                                errorMessage = false
-                            } else {
-                                errorMessage = true
-                            }
-                        }) {
-                            Text("Masuk & Aktifkan")
-                                .font(.system(size: 16, weight: .semibold))
-                                .foregroundColor(.white)
-                                .frame(maxWidth: .infinity)
-                                .padding()
-                                .background(Color.blue)
-                                .cornerRadius(12)
-                        }
-                        .padding(.horizontal, 40)
-                    }
-                }
-            }
-        }
-        .onAppear {
-            checkServerKillSwitchREST()
-        }
-    }
-    
-    func checkServerKillSwitchREST() {
-        guard let url = URL(string: firebaseURL) else {
-            self.isLoading = false
-            return
-        }
-        
-        URLSession.shared.dataTask(with: url) { data, _, _ in
-            DispatchQueue.main.async {
-                if let data = data, let rawString = String(data: data, encoding: .utf8) {
-                    let status = rawString.replacingOccurrences(of: "\"", with: "").trimmingCharacters(in: .whitespacesAndNewlines)
-                    if status == "blocked" {
-                        self.isServerBlocked = true
-                    } else {
-                        self.isServerBlocked = false
-                    }
-                }
-                self.isLoading = false
-            }
-        }.resume()
-    }
-}
-
-// --- TAMPILAN UTAMA PENGATURAN ---
 struct SettingsMainView: View {
     @State private var isAirplaneModeOn = false
     @State private var searchText = ""
@@ -209,7 +80,7 @@ struct SettingsMainView: View {
                                 .frame(width: 62, height: 62)
                             
                             VStack(alignment: .leading, spacing: 3) {
-                                Text("Suhana")
+                                Text("Dimas Saputra")
                                     .font(.system(size: 20, weight: .semibold))
                                     .foregroundColor(.white)
                                 Text("Akun Apple, iCloud, dan lainnya")
@@ -263,7 +134,7 @@ struct SettingsMainView: View {
                                 SettingsIcon(systemName: "wifi", backgroundColor: .blue)
                                 Text("Wi-Fi").font(.system(size: 16)).foregroundColor(.white)
                                 Spacer()
-                                Text("Terhubung").font(.system(size: 15)).foregroundColor(Color(white: 0.5))
+                                Text("AWIS D ROKET").font(.system(size: 15)).foregroundColor(Color(white: 0.5))
                             }
                             .padding(.vertical, 10)
                             
@@ -483,7 +354,7 @@ struct SettingsMainView: View {
     }
 }
 
-// Ikon Bluetooth Proporsional
+// Ikon Bluetooth Proporsional Final
 struct CustomBluetoothIcon: View {
     var body: some View {
         ZStack {
@@ -618,7 +489,7 @@ struct AboutSettingsView: View {
         ScrollView {
             VStack(spacing: 20) {
                 VStack(spacing: 0) {
-                    HStack { Text("Nama"); Spacer(); Text("iPhone Suhana").foregroundColor(.gray) }.padding(.vertical, 11)
+                    HStack { Text("Nama"); Spacer(); Text("iPhone Dimas").foregroundColor(.gray) }.padding(.vertical, 11)
                     Divider().background(Color(white: 0.2))
                     HStack { Text("Versi iOS"); Spacer(); Text("26.5").foregroundColor(.gray) }.padding(.vertical, 11)
                     Divider().background(Color(white: 0.2))
